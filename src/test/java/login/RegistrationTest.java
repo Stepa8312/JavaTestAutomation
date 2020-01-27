@@ -8,5 +8,7 @@ public class RegistrationTest extends ParentTest {
     @Test
     public void LoginTest() {
         loginPage.openLoginPage();
+        loginPage.clickOnFemalePhoto();
+
     }
 }

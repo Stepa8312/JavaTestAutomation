@@ -2,8 +2,8 @@ package parentTest;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import pages.LoginPage;
 
 import java.io.File;
@@ -13,7 +13,7 @@ public class ParentTest {
     WebDriver webDriver;
     protected LoginPage loginPage;
 
-    @BeforeClass
+    @BeforeTest
     public void setUp() {
         File file = new File("./src/drivers/chromedriver.exe");
         System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
@@ -23,7 +23,7 @@ public class ParentTest {
         loginPage = new LoginPage(webDriver);
     }
 
-    @AfterClass
+    @AfterTest
     public void tearDown() {
         webDriver.quit();
     }
