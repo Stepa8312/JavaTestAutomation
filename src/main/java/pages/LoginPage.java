@@ -56,6 +56,21 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = "//form[@name='reg-form']")
     WebElement registrationForm;
 
+    @FindBy(xpath = "//input[@name='name']")
+    WebElement nameInput;
+
+    @FindBy(xpath = "//input[@name='email']")
+    WebElement emailInput;
+
+    @FindBy(xpath = "//select[@name='gender']")
+    WebElement gender;
+
+    @FindBy(xpath = "//select[@name='age']")
+    WebElement age;
+
+    @FindBy(xpath = "//button[@type='submit']")
+    WebElement signUpButton;
+
     public void openLoginPage() {
         try{
             webDriver.get("https://m.hitwe.com/landing/inter?p=15276");
@@ -101,4 +116,13 @@ public class LoginPage extends ParentPage {
     public boolean isRegisterFormDisplayed() {
         return actionsWithOurElements.isElementDisplayed(registrationForm);
     }
+
+    public void enterLogin(String loginName) {
+        actionsWithOurElements.enterTextIntoElement(nameInput, loginName);
+    }
+
+    public void enterEmail(String email) {
+        actionsWithOurElements.enterTextIntoElement(emailInput, email);
+    }
+
 }

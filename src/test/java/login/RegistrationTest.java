@@ -10,9 +10,21 @@ public class RegistrationTest extends ParentTest {
     public void TestOpenRegistrationForm() {
         loginPage.openLoginPage();
         loginPage.clickOnFemalePhoto();
-        loginPage.clickFemalePhotoDarkHair();
+        loginPage.clickFemalePhotoLightHair();
         loginPage.clickFemalePhotoDarkEyes();
-        loginPage.clickFemalePhotoSlim();
+        loginPage.clickFemalePhotoCurvy();
         Assert.assertTrue(loginPage.isRegisterFormDisplayed(), "Registration form is not displayed");
+    }
+
+    @Test
+    public void TestLogin() {
+        loginPage.openLoginPage();
+        loginPage.clickOnFemalePhoto();
+        loginPage.clickFemalePhotoDarkHair();
+        loginPage.clickFemalePhotoLightEyes();
+        loginPage.clickFemalePhotoSlim();
+        loginPage.enterLogin("Testuser");
+        loginPage.enterEmail("qatest@testmail.com");
+
     }
 }
