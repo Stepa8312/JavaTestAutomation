@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -47,6 +48,17 @@ public class ActionsWithOurElements {
         } catch (Exception e) {
             logger.info("Element not found");
             return false;
+        }
+    }
+
+    public void selectValueInDD(WebElement element, String value) {
+        try {
+            Select select = new Select(element);
+            select.selectByValue(value);
+            logger.info("Value " + value + " was selected in DropDown");
+        } catch (Exception e) {
+            logger.error("Cannot work with element" + e);
+            Assert.fail("Cannot work with element" + e);
         }
     }
 }

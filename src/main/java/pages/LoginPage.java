@@ -11,6 +11,8 @@ public class LoginPage extends ParentPage {
         super(webDriver);
     }
 
+    String loginURL = "https://m.hitwe.com/landing/inter?p=15276";
+
    @FindBy(xpath = "//div[@data-gender='f']")
     WebElement femalePhoto;
 
@@ -63,17 +65,17 @@ public class LoginPage extends ParentPage {
     WebElement emailInput;
 
     @FindBy(xpath = "//select[@name='gender']")
-    WebElement gender;
+    WebElement genderDropDown;
 
     @FindBy(xpath = "//select[@name='age']")
-    WebElement age;
+    WebElement ageDropDown;
 
     @FindBy(xpath = "//button[@type='submit']")
     WebElement signUpButton;
 
     public void openLoginPage() {
         try{
-            webDriver.get("https://m.hitwe.com/landing/inter?p=15276");
+            webDriver.get(loginURL);
             logger.info("Login page was opened");
         } catch (Exception e) {
             logger.error("Cannot open Login Page");
@@ -123,6 +125,18 @@ public class LoginPage extends ParentPage {
 
     public void enterEmail(String email) {
         actionsWithOurElements.enterTextIntoElement(emailInput, email);
+    }
+
+    public void selectGender(String genderValue) {
+        actionsWithOurElements.selectValueInDD(genderDropDown, genderValue);
+    }
+
+    public void selectAge(String age) {
+        actionsWithOurElements.selectValueInDD(ageDropDown, age);
+    }
+
+    public void clickRegisterButton() {
+        actionsWithOurElements.clickOnElement(signUpButton);
     }
 
 }

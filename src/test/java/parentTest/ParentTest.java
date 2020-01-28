@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import pages.HomePage;
 import pages.LoginPage;
 
 import java.io.File;
@@ -12,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 public class ParentTest {
     WebDriver webDriver;
     protected LoginPage loginPage;
+    protected HomePage homePage;
 
     @BeforeTest
     public void setUp() {
@@ -21,6 +23,7 @@ public class ParentTest {
         webDriver.manage().window().maximize();
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         loginPage = new LoginPage(webDriver);
+        homePage = new HomePage(webDriver);
     }
 
     @AfterTest
