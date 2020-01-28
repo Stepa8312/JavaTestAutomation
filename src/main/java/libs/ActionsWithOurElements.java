@@ -8,6 +8,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.io.File;
+
 public class ActionsWithOurElements {
     WebDriver webDriver;
     Logger logger = Logger.getLogger(getClass());
@@ -59,6 +61,23 @@ public class ActionsWithOurElements {
         } catch (Exception e) {
             logger.error("Cannot work with element" + e);
             Assert.fail("Cannot work with element" + e);
+        }
+    }
+
+    public void uploadFile(WebElement element, String path) {
+        File f = new File(path);
+        if (f.exists()) {
+            String filePath = f.getAbsolutePath();
+            logger.info("upload file " + filePath);
+            element.sendKeys(filePath);
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } else {
+            logger.error("file " + path + " not found");
+            Assert.fail("file " + path + " not found");
         }
     }
 }

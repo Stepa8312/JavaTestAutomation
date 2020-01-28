@@ -31,5 +31,6 @@ public class RegistrationTest extends ParentTest {
         loginPage.clickRegisterButton();
         homePage.checkAndClosePopUp();
         Assert.assertTrue(homePage.isLogoDisplayed(), "Main logo is not displayed");
+        homePage.uploadUserPhoto("data/avatar.jpg");
     }
 }
