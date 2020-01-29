@@ -24,6 +24,7 @@ public class RegistrationTest extends ParentTest {
         loginPage.clickFemalePhotoDarkHair();
         loginPage.clickFemalePhotoLightEyes();
         loginPage.clickFemalePhotoSlim();
+        Assert.assertTrue(loginPage.isRegisterFormDisplayed(), "Registration form is not displayed");
         loginPage.enterLogin("Testuser");
         loginPage.enterEmail(RandomString.make(5) + "@testmail.com");
         loginPage.selectGender("f");

@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ParentTest {
     WebDriver webDriver;
-    String browser = "chrome";
+    String browser = "firefox";
     protected LoginPage loginPage;
     protected HomePage homePage;
 
