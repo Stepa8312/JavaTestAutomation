@@ -19,17 +19,18 @@ public class HomePage extends ParentPage {
     @FindBy(xpath = "//a[@class='interstial-close']")
     WebElement mobileAppPopUpCloseButton;
 
-    @FindBy(xpath = "//input[@type='file']")
-    WebElement uploadPhotoInput;
+    @FindBy(xpath = "//div[@class='prof_add_avatar']")
+    WebElement addUserAvatarButton;
 
-    @FindBy(xpath = "//a[contains(@href, 'page=photo')]")
-    WebElement photoMenuItem;
+    @FindBy(xpath = "//a[@class='add-ava-go-btn']")
+    WebElement addAvatarCloseDialog;
 
-    @FindBy(xpath = "//a[@class='prof-photo-list-upload-btn']")
+    @FindBy(xpath = "//a[@class='add-ava-up-btn fileUpload']")
     WebElement uploadPhotoButton;
 
-    @FindBy(xpath = "//a[@class='add-btn']")
-    WebElement addSelectedPhotoButton;
+    @FindBy(xpath = "//div[@class='prof-ava']//div[contains(@class, 'avatar-placeholder')]")
+    WebElement avatarPlaceholder;
+
 
     public void checkAndClosePopUp() {
         if (actionsWithOurElements.isElementDisplayed(mobileAppPopUp)) {
@@ -42,10 +43,12 @@ public class HomePage extends ParentPage {
     }
 
     public void uploadUserPhoto(String fileName) {
-        actionsWithOurElements.clickOnElement(photoMenuItem);
-        actionsWithOurElements.clickOnElement(uploadPhotoButton);
-        actionsWithOurElements.uploadFile(uploadPhotoInput, fileName);
-        actionsWithOurElements.clickOnElement(addSelectedPhotoButton);
+        actionsWithOurElements.clickOnElement(addUserAvatarButton);
+        actionsWithOurElements.uploadFile(uploadPhotoButton, fileName);
+        actionsWithOurElements.clickOnElement(addAvatarCloseDialog);
+    }
 
+    public boolean isUserHasAvatar() {
+        return !avatarPlaceholder.getAttribute("class").contains("no-photo");
     }
 }

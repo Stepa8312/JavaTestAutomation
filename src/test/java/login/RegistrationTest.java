@@ -18,7 +18,7 @@ public class RegistrationTest extends ParentTest {
     }
 
     @Test(testName = "Registration positive scenarios", priority = 1)
-    public void TestRegistration() {
+    public void TestRegistrationAndUploadPhoto() {
         loginPage.openLoginPage();
         loginPage.clickOnFemalePhoto();
         loginPage.clickFemalePhotoDarkHair();
@@ -31,6 +31,8 @@ public class RegistrationTest extends ParentTest {
         loginPage.clickRegisterButton();
         homePage.checkAndClosePopUp();
         Assert.assertTrue(homePage.isLogoDisplayed(), "Main logo is not displayed");
+        Assert.assertFalse(homePage.isUserHasAvatar(), "User already has avatar");
         homePage.uploadUserPhoto("data/avatar.jpg");
+        Assert.assertTrue(homePage.isUserHasAvatar(), "User avatar is not displayed");
     }
 }

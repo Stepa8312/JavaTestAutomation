@@ -8,6 +8,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.File;
 
 public class ActionsWithOurElements {
@@ -64,14 +67,58 @@ public class ActionsWithOurElements {
         }
     }
 
+    public void uploadFileRobot(String path) {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            Robot robot = new Robot();
+            for (char c : path.toCharArray()) {
+                robot.delay(50);
+                if (c == ':') {
+                    robot.keyPress(KeyEvent.VK_SHIFT);
+                    robot.keyPress(KeyEvent.VK_SEMICOLON);
+                    robot.keyRelease(KeyEvent.VK_SHIFT);
+                } else if (c == '/') {
+                    robot.keyPress(KeyEvent.VK_BACK_SLASH);
+                } else if (c == '_') {
+                    robot.keyPress(KeyEvent.VK_SHIFT);
+                    robot.keyPress(KeyEvent.VK_MINUS);
+                    robot.keyRelease(KeyEvent.VK_SHIFT);
+                } else {
+                    robot.keyPress(KeyStroke.getKeyStroke(Character.toUpperCase(c), 0).getKeyCode());
+                    robot.keyRelease(KeyStroke.getKeyStroke(Character.toUpperCase(c), 0).getKeyCode());
+                }
+            }
+            robot.keyPress(KeyEvent.VK_ENTER);
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void uploadFile(WebElement element, String path) {
         File f = new File(path);
+        final String filePath = f.getAbsolutePath();
         if (f.exists()) {
-            String filePath = f.getAbsolutePath();
             logger.info("upload file " + filePath);
-            element.sendKeys(filePath);
+            Thread upload = new Thread() {
+                @Override
+                public void run() {
+                    uploadFileRobot(filePath);
+                }
+            };
+            upload.start();
+            element.click();
             try {
-                Thread.sleep(10000);
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            try {
+                upload.join();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
